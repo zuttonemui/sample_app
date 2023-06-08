@@ -1,0 +1,26 @@
+<h1>新規投稿</h1>
+<% if @list.errors.any? %>
+  <%= @list.errors.count %>件のエラーが発生しました
+  <ul>
+    <% @list.errors.full_messages.each do |message| %>
+      <li><%= message %></li>
+    <% end %>
+  </ul>
+<% end %>
+
+<%= form_with model: @list, url: '/lists', method: :post do |f| %>
+  <div class="form-group">
+    <%= f.label :title %></br>
+    <%= f.text_field :title %>
+  </div>
+  <div class="form-group">
+    <%= f.label :body %></br>
+    <%= f.text_area :body %>
+  </div>
+  <div class="form-group">
+    <%= f.file_field :image, accept: "image/*" %>
+  </div>
+  <div class="form-group">
+    <%= f.submit '投稿' %>
+  </div>
+<% end %>
